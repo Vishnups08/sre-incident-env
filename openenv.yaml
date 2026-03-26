@@ -1,0 +1,66 @@
+name: sre-incident-response
+version: "1.0.0"
+description: >
+  An OpenEnv environment that simulates real-world production incident response.
+  AI agents must diagnose, investigate, and resolve system incidents like a
+  Site Reliability Engineer, handling scenarios from simple deployment failures
+  to complex cascading failures across microservice architectures.
+
+author: "Vishnu P S"
+tags:
+  - openenv
+  - sre
+  - incident-response
+  - devops
+  - real-world
+
+environment:
+  type: "text"
+  domain: "site-reliability-engineering"
+  
+  observation:
+    type: "structured"
+    model: "env.models.Observation"
+    description: "Alerts, logs, metrics, service status, and diagnostic results"
+    
+  action:
+    type: "structured"  
+    model: "env.models.Action"
+    description: "Investigation and remediation actions (check_logs, restart_service, resolve, etc.)"
+    
+  reward:
+    type: "structured"
+    model: "env.models.Reward"
+    description: "Step reward with breakdown, cumulative reward"
+
+tasks:
+  - id: "easy_crashed_deploy"
+    name: "Crashed After Deploy"
+    difficulty: "easy"
+    max_steps: 10
+    description: "Payment service crashed after bad deployment"
+    
+  - id: "medium_slow_api"
+    name: "Slow API Responses"
+    difficulty: "medium"
+    max_steps: 12
+    description: "Database connection pool exhaustion from analytics query"
+    
+  - id: "hard_cascading_failure"
+    name: "Cascading Failure"
+    difficulty: "hard"
+    max_steps: 15
+    description: "Memory leak causing cascading failure across services"
+
+endpoints:
+  reset: "POST /reset"
+  step: "POST /step"
+  state: "GET /state"
+  tasks: "GET /tasks"
+  grader: "GET /grader"
+  baseline: "POST /baseline"
+
+deployment:
+  platform: "huggingface-spaces"
+  port: 7860
+  dockerfile: "Dockerfile"

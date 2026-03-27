@@ -6,7 +6,7 @@ description: >
   Site Reliability Engineer, handling scenarios from simple deployment failures
   to complex cascading failures across microservice architectures.
 
-author: "Vishnu P S"
+authors: ["Vishnu P S"]
 tags:
   - openenv
   - sre
@@ -20,17 +20,17 @@ environment:
   
   observation:
     type: "structured"
-    model: "env.models.Observation"
+    schema: "env.models.Observation"
     description: "Alerts, logs, metrics, service status, and diagnostic results"
     
   action:
     type: "structured"  
-    model: "env.models.Action"
+    schema: "env.models.Action"
     description: "Investigation and remediation actions (check_logs, restart_service, resolve, etc.)"
     
   reward:
     type: "structured"
-    model: "env.models.Reward"
+    schema: "env.models.Reward"
     description: "Step reward with breakdown, cumulative reward"
 
 tasks:
@@ -53,12 +53,12 @@ tasks:
     description: "Memory leak causing cascading failure across services"
 
 endpoints:
-  reset: "POST /reset"
-  step: "POST /step"
-  state: "GET /state"
-  tasks: "GET /tasks"
-  grader: "GET /grader"
-  baseline: "POST /baseline"
+  reset: "/reset"
+  step: "/step"
+  state: "/state"
+  tasks: "/tasks"
+  grader: "/grader"
+  baseline: "/baseline"
 
 deployment:
   platform: "huggingface-spaces"

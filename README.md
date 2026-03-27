@@ -1,3 +1,13 @@
+---
+title: SRE Incident Env
+emoji: 🚨
+colorFrom: red
+colorTo: yellow
+sdk: docker
+app_file: app.py
+pinned: false
+---
+
 # 🚨 SRE Incident Response Environment
 
 An [OpenEnv](https://github.com/openenv)-compatible environment that simulates real-world production incident response. AI agents must diagnose, investigate, and resolve system incidents like a Site Reliability Engineer (SRE).
@@ -99,6 +109,7 @@ This ensures agents get meaningful learning signal at every step, not just binar
 ```bash
 docker build -t sre-env .
 docker run -p 7860:7860 sre-env
+```
 
 ### Local Development
 ```bash

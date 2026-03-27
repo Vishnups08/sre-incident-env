@@ -7,12 +7,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+# Hugging Face Spaces require running as a non-root user (uid 1000)
+RUN useradd -m -u 1000 user
+USER user
+ENV PATH="/home/user/.local/bin:$PATH"
+
 # Copy requirements first for caching
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --chown=user:user requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY . .
+COPY --chown=user:user . .
 
 # Set environment variables
 ENV PYTHONPATH=/app
